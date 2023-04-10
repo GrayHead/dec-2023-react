@@ -1,5 +1,4 @@
 import './App.css'
-import Users from "./components/users/Users";
 
 
 let users = [
@@ -23,9 +22,6 @@ function App() {
     return (
         <div>
             <h1>{msg}</h1>
-
-            <Users xxx={users}/>
-            <hr/>
 
 
         </div>
