@@ -28,7 +28,7 @@ const CarForm: FC<IProps> = ({setOnChange, carForUpdate, setCarForUpdate}) => {
             })
         }
 
-    }, [carForUpdate])
+    }, [carForUpdate, setValue])
     const save: SubmitHandler<ICar> = async (car) => {
         await carService.create(car);
         setOnChange(prevState => !prevState)
