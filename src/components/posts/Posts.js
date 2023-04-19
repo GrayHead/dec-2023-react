@@ -30,6 +30,7 @@ const Posts = () => {
             <div>
                 <h4>post details view</h4>
                 <Outlet/>
+                <Outlet/>
 
             </div>
         </div>
