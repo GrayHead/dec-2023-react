@@ -8,7 +8,6 @@ const carService = {
     updateById: (id, car) => axiosService.put(`${urls.cars}/${id}`, car),
     deleteById: (id) => axiosService.delete(`${urls.cars}/${id}`)
 }
-
 export {
     carService
 }

@@ -1,4 +1,8 @@
-const Car = ({car,serCarForUpdate}) => {
+import {useAppReducer} from "../../hooks/useAppReducer";
+import {carActions} from "../../reducers/car.reducer";
+
+const Car = ({car}) => {
+    const [, dispatch] = useAppReducer(state=>state.cars);
     const {id, brand, price, year} = car;
     return (
         <div>
@@ -6,7 +10,7 @@ const Car = ({car,serCarForUpdate}) => {
             <div>brand: {brand}</div>
             <div>price: {price}</div>
             <div>year: {year}</div>
-            <button onClick={()=>serCarForUpdate(car)}>update</button>
+            <button onClick={()=>dispatch(carActions.setCarForUpdate(car))}>update</button>
         </div>
     );
 };

@@ -3,8 +3,11 @@ import {carService} from "../../services/car.service";
 import {useEffect} from "react";
 import {joiResolver} from '@hookform/resolvers/joi';
 import {carValidator} from "../../validators/car.validator";
+import {useAppReducer} from "../../hooks/useAppReducer";
+import {carActions} from "../../reducers/car.reducer";
 
-const CarForm = ({setAllCars, carForUpdate}) => {
+const CarForm = () => {
+    const [{carForUpdate}, dispatch] = useAppReducer(state=>state.cars);
     const {register, handleSubmit, reset, formState: {errors, isValid}, setValue} = useForm({
         mode: 'all',
         resolver: joiResolver(carValidator)
@@ -16,44 +19,22 @@ const CarForm = ({setAllCars, carForUpdate}) => {
             setValue('price', carForUpdate.price, {shouldValidate: true})
             setValue('year', carForUpdate.year, {shouldValidate: true})
         }
-    }, [carForUpdate])
+    }, [carForUpdate, setValue])
 
     const save = async (car) => {
-        const {data} = await carService.create(car);
-        setAllCars(prev => !prev)
+        await carService.create(car);
+        dispatch(carActions.setTrigger())
         reset()
     }
 
     const update = async (car) => {
-
+        await carService.updateById(carForUpdate.id, car)
+        dispatch(carActions.setTrigger())
+        reset()
+        dispatch(carActions.setCarForUpdate(null))
     }
 
     return (
-        // <form onSubmit={handleSubmit(carForUpdate ? update : save)}>
-        //     <input type="text" placeholder={'brand'} {...register('brand', {
-        //         pattern: {
-        //             value: /^[a-zA-Zа-яА-яёЁіІїЇ]{1,20}$/,
-        //             message: 'Бранд має складатись тільки з літер мін 1 макс 20 літер'
-        //         },
-        //         required: {value: true, message: 'required'}
-        //     })}/>
-        //     {errors.brand && <span>{errors.brand.message}</span>}
-        //     <input type="text" placeholder={'price'} {...register('price', {
-        //         valueAsNumber: true,
-        //         min: {value: 0, message: 'min 0'},
-        //         max: {value: 1000000, message: 'max 1000000'},
-        //         required: true
-        //     })}/>
-        //     {errors.price && <span>{errors.price.message}</span>}
-        //     <input type="text" placeholder={'year'} {...register('year', {
-        //         valueAsNumber: true,
-        //         min: {value: 1990, message: 'min 1990'},
-        //         max: {value: new Date().getFullYear(), message: 'current year'},
-        //         required: true
-        //     })}/>
-        //     {errors.year && <span>{errors.year.message}</span>}
-        //     <button disabled={!isValid}>{carForUpdate ? 'Update' : 'Create'}</button>
-        // </form>
         <form onSubmit={handleSubmit(carForUpdate ? update : save)}>
             <input type="text" placeholder={'brand'} {...register('brand')}/>
             {errors.brand && <span>{errors.brand.message}</span>}
