@@ -32,9 +32,9 @@ const reducer = (state, action) => {
 const CatDogPage = () => {
     const stateDispatch = useReducer(reducer, {cats: [], dogs: []});
     return (
-        <div>
-            <Cats/>
-            <Dogs/>
+        <div style={{display:'flex', justifyContent:'space-around'}}>
+            <Cats stateDispatch={stateDispatch}/>
+            <Dogs stateDispatch={stateDispatch}/>
         </div>
     );
 };
