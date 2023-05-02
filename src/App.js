@@ -1,7 +1,11 @@
+import {ComponentOne, ComponentTwo, Header} from "./components";
+
 const App = () => {
     return (
         <div>
-            App
+            <Header/>
+            <ComponentOne/>
+            <ComponentTwo/>
         </div>
     );
 };
