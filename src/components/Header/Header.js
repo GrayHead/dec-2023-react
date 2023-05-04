@@ -7,8 +7,6 @@ const Header = () => {
 
     return (
         <div className={css.Header}>
-            <button onClick={() => navigate('users')}>users</button>
-            <button onClick={() => navigate('comments')}>comments</button>
             <button onClick={() => navigate('cars')}>cars</button>
         </div>
     );
