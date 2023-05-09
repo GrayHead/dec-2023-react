@@ -1,0 +1,18 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    color: snow;
+    background-color: blue;
+}
+
+.Header a {
+    text-decoration: none;
+    color: snow;
+    padding: 0 10px;
+}
+
+.Header a[class='active'] {
+    color: red;
+}
