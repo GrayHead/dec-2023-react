@@ -19,6 +19,10 @@ class CarService {
     deleteById(id: number): IRes<void> {
         return axiosService.delete(urls.cars.byId(id))
     }
+
+    addPhoto(id: number, photo: FormData): IRes<ICar> {
+        return axiosService.put(urls.cars.addPhoto(id), photo)
+    }
 }
 
 export const carService = new CarService()
